@@ -1,2 +1,2 @@
 # project1-classicalciphers
-A program that solves the classical ciphers auto solver 
+A program that solves the classical ciphers auto solver.
