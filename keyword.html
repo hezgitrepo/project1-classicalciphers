@@ -1,15 +1,19 @@
 <!doctype html>
-
 <!--
+Keyword cipher is a form of monoalphabetic substitution. 
+A keyword is used as the key, and it determines the letter matchings of the cipher alphabet to the plain alphabet. 
+Repeats of letters in the word are removed, then the cipher alphabet is generated with the keyword matching to A, B, C, etc. until the keyword is used up, whereupon the rest of the ciphertext letters are used in alphabetical order, excluding those already used in the key. 
+
 AUTHORS: Michael Thorman, Hez Thang, Garrett Sanders
 -->
 
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 
 
-<title>Keyword Cipher </title>
+<title>Keyword Substitution Cipher</title>
 <style>
 *{
 	margin:0 0 6px;
@@ -72,29 +76,33 @@ hr{
 </head>
 
 <body>
+	<script src="keyword.js"></script>
 	<header>
-		<h1>Classical Cryptography Autosolver - Keyword Cipher</h1>
+		<h1>Classical Cryptography Autosolver - Keyword Substitution Cipher</h1>
 		<p>By Michael Thorman, Hez Thang, Garrett Sanders</p>
     </header>
-	<div id="ciphers">
-		<h3> Please enter the ciphertext and click on decipher </h3>
+	<!-- <div id="ciphers"> -->
+		<h3> Enter the message(s) you want to decipher with the appropriate keyword</h3>
 		<hr/> 
- 
-		
-			
-				<label for="ciphertext"> Ciphertext:</label>
-				<br/>
-				<textarea rows="10" cols="90" id="ciphertext" name="ciphertext" placeholder="Enter ciphertext here"></textarea>
-				<br/>
-				<button onClick="decipher()">Decipher</button>
-				<br/>
-				<textarea cols="90" rows="20" id="output" name="output" placeholder="Algorithm used, tests used for determination of algorithm and results used to break the message" readonly></textarea>
-			
 
-	 
+		<form>
+			<label for="message">Ciphertext Message:</label>
+			<br/>
+			<textarea rows="10" cols="90" id ="message"  name="message" placeholder="Enter your message here..."></textarea>
+			<!-- <input type = "text" name = "" id = "message" /> -->
+
+			<br/>
+			<hr>	
+			<label>Keyword: </label>
+			<input type= "text" placeholder="Enter a keyword here..." name="" id="key" >
+
+		<hr>
+		<br/>
+		<button vaule = "encrypt" onclick="encryptString()" >Decipher Message </button>
+		
+			<textarea cols="90" rows="20"  id = "output" placeholder="Algorithm used, tests used for determination of algorithm and results used to break the message" readonly></textarea>
+		</form>
 	</div>
+
 </body>
 </html>
-
-
-

@@ -7,7 +7,111 @@ AUTHORS: Michael Thorman, Hez Thang, Garrett Sanders
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script src="anagram.js"></script>
 
+<title>Anagrams Cipher</title>
+<style>
+*{
+	margin:0 0 6px;
+}
+header{
+	text-align:left;
+	color:white;
+	background-color:#134;
+	padding:30px 150px;
+}
+body {
+	background-color: #CCE0DF;	
+									
+}
+body p {
+	padding-left: 2em;
+}
+
+
+li, li a{						
+	list-style: none;
+	background-color: #43ABA4;
+	text-align: center;
+	color: white;
+	border-radius: 3px;
+	padding: 2px;
+}
+
+h2{
+	width: 100%;
+	color: #1E6E68;
+	line-height: 40px;
+}
+h3{
+	color: #1E6E68;
+	line-height: 30px;
+	text-align: center;
+}
+
+#ciphers{			
+	width: 720px;
+	margin: 0 auto;
+	box-shadow: 0 2px 15px #EEE;
+	min-height: 300px;
+	padding: 15px;
+	border-radius: 10px;
+	background-color: white;
+}
+#ciphers ul {
+	float:left;
+	width: 300px;
+}
+
+hr{						
+	margin: 10px 0;
+	width: 100%;
+	float: left;
+}
+</style>
+
+</head>
+
+<body>
+	<header>
+		<h1>Classical Cryptography Autosolver - Anagram Cipher</h1>
+		<p>By Michael Thorman, Hez Thang, Garrett Sanders</p>
+    </header>
+	<div id="ciphers">
+		<h3> Enter the ciphertext to find the factors for the Anagram size and begin deciphering </h3>
+		<hr/> 
+ 
+		
+			
+				<label for="ciphertext"> Ciphertext:</label>
+				<br/>
+				<textarea rows="10" cols="90" id="ciphertext" name="ciphertext" placeholder="Enter ciphertext here"></textarea>
+				<br/>
+				<textarea rows="1" cols="30" id="anagramKey" name="anagramKey" placeholder="Anagram Key(e.g. 1,2,3)"></textarea> 
+				<br/>
+				<button id="factor" onclick="factor()">Find Factors</button>
+				<text id="factorsLabel" name="factorsLabel">Factors: </text> 
+				<textarea rows="1" id="factorsDisplay" name="factorsDisplay" readonly>???</textarea>
+				<br/>
+				<button id="decipher" onclick="decipher()">Decipher</button>
+				<br/>
+				<textarea cols="90" rows="20" id="output" name="output" placeholder="Algorithm used, tests used for determination of algorithm and results used to break the message" readonly></textarea>
+			
+
+	 
+	</div>
+</body>
+</html>
+<!doctype html>
+
+<!--
+AUTHORS: Michael Thorman, Hez Thang, Garrett Sanders
+-->
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script src="anagram.js"></script>
 
 <title>Anagram</title>
 <style>
@@ -69,6 +173,7 @@ hr{
 	float: left;
 }
 </style>
+
 </head>
 
 <body>
@@ -77,7 +182,7 @@ hr{
 		<p>By Michael Thorman, Hez Thang, Garrett Sanders</p>
     </header>
 	<div id="ciphers">
-		<h3> Please enter the ciphertext and click on decipher </h3>
+		<h3> Please enter the ciphertext and find factors for the anagram size and begin deciphering. </h3>
 		<hr/> 
  
 		
@@ -86,7 +191,13 @@ hr{
 				<br/>
 				<textarea rows="10" cols="90" id="ciphertext" name="ciphertext" placeholder="Enter ciphertext here"></textarea>
 				<br/>
-				<button onClick="decipher()">Decipher</button>
+				<textarea rows="1" cols="30" id="anagramKey" name="anagramKey" placeholder="Anagram Key(e.g. 1,2,3)"></textarea> 
+				<br/>
+				<button id="factor" onclick="factor()">Find Factors</button>
+				<text id="factorsLabel" name="factorsLabel">Factors: </text> 
+				<textarea rows="1" id="factorsDisplay" name="factorsDisplay" readonly>???</textarea>
+				<br/>
+				<button id="decipher" onclick="decipher()">Decipher</button>
 				<br/>
 				<textarea cols="90" rows="20" id="output" name="output" placeholder="Algorithm used, tests used for determination of algorithm and results used to break the message" readonly></textarea>
 			

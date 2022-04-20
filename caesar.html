@@ -6,6 +6,9 @@ AUTHORS: Michael Thorman, Hez Thang, Garrett Sanders
 
 <html lang="en">
 <head>
+
+<script src="caesar.js"></script>
+
 <meta charset="UTF-8">
 
 
@@ -72,29 +75,35 @@ hr{
 </head>
 
 <body>
+	<script src="caesar.js"></script>
+
 	<header>
 		<h1>Classical Cryptography Autosolver - Ceasar Shift</h1>
 		<p>By Michael Thorman, Hez Thang, Garrett Sanders</p>
     </header>
-	<div id="ciphers">
-		<h3> Please enter the ciphertext and click on decipher </h3>
-		<hr/> 
- 
-		
-			
-				<label for="ciphertext"> Ciphertext:</label>
-				<br/>
-				<textarea rows="10" cols="90" id="ciphertext" name="ciphertext" placeholder="Enter ciphertext here"></textarea>
-				<br/>
-				<button onClick="decipher()">Decipher</button>
-				<br/>
-				<textarea cols="90" rows="20" id="output" name="output" placeholder="Algorithm used, tests used for determination of algorithm and results used to break the message" readonly></textarea>
-			
+	<!-- <div id="input"> -->
+		<!-- <div class="input"> -->
 
-	 
+		<h3> Enter the plaintext(s) you want to convert a cipher text deciphering </h3>
+		<hr/> 
+		<form>
+				<label for="plaintext">Plaintext:</label>
+				<br/>
+				<textarea rows="10" cols="90"  name="plaintext" placeholder="Enter plaintext message here..."></textarea>
+				<br/>
+				<hr>	
+				<label>Shifting by: </label>
+				<input type="number" value="1" name="shift" min= "1" max="26">
+
+			<hr>
+			<br/>
+			<div id = "output">
+				<input type='submit' value='Decipher'>
+				<br/>
+				<textarea cols="90" rows="20"  name="output" placeholder="Algorithm used, tests used for determination of algorithm and results used to break the message" readonly></textarea>
+			</form>
 	</div>
 </body>
 </html>
-
 
 
