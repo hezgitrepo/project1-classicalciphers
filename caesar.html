@@ -1,13 +1,10 @@
 <!doctype html>
-
 <!--
 AUTHORS: Michael Thorman, Hez Thang, Garrett Sanders
 -->
 
 <html lang="en">
 <head>
-
-<script src="caesar.js"></script>
 
 <meta charset="UTF-8">
 
@@ -75,34 +72,63 @@ hr{
 </head>
 
 <body>
-	<script src="caesar.js"></script>
-
 	<header>
-		<h1>Classical Cryptography Autosolver - Ceasar Shift</h1>
-		<p>By Michael Thorman, Hez Thang, Garrett Sanders</p>
+		<h1>Classical Cryptography Autosolver - Caesar Shift Cipher</h1>
+		<p>Created by Michael Thorman, Hez Thang, Garrett Sanders</p>
     </header>
-	<!-- <div id="input"> -->
 		<!-- <div class="input"> -->
 
-		<h3> Enter the plaintext(s) you want to convert a cipher text deciphering </h3>
+		<h2> Enter the plaintext message you wish to decipher with the appropriate shift size </h2>
 		<hr/> 
-		<form>
+		<form>  
+
 				<label for="plaintext">Plaintext:</label>
 				<br/>
-				<textarea rows="10" cols="90"  name="plaintext" placeholder="Enter plaintext message here..."></textarea>
+				<textarea rows="10" cols="90"  name="plaintext" placeholder="Enter the plaintext message you wish to decode here..."></textarea>
 				<br/>
 				<hr>	
-				<label>Shifting by: </label>
+				<label>Shift Size: </label>
 				<input type="number" value="1" name="shift" min= "1" max="26">
 
 			<hr>
 			<br/>
-			<div id = "output">
-				<input type='submit' value='Decipher'>
+				<input type='submit' value='Decipher The Message'>
 				<br/>
-				<textarea cols="90" rows="20"  name="output" placeholder="Algorithm used, tests used for determination of algorithm and results used to break the message" readonly></textarea>
+				<textarea cols="90" rows="10"  id="output" placeholder="Algorithm used, tests used for determination of algorithm and results used to break the message..." ></textarea>
 			</form>
-	</div>
+
+	<script language="JavaScript">
+		//JS code
+		//const var for all the alphabets 
+	const alphabet = [
+    'A','B','C','D','E','F',
+    'G','H','I','J','K','L',
+    'M','N','O','P','Q','R',
+    'S','T','U','V','W','X',
+    'Y','Z'
+  ];
+  
+  const form = document.forms[0];
+  const output = document.getElementById('output');
+  
+  form.addEventListener ('submit',event => {
+    event.preventDefault();
+    output.innerHTML = [... form.plaintext.value ].map(char => encrypt(char)).join('');
+  }
+  );
+  //the main algorithm begins here
+  function encrypt(char) {
+    const shift = Number(form.shift.value);
+    if (alphabet.includes(char.toUpperCase()))
+    { 
+      const position = alphabet.indexOf(char.toUpperCase());
+      const newPosition = (position + shift)%26;
+      return alphabet[newPosition] 
+    }
+    else { return char }
+    }
+
+</script>
 </body>
 </html>
 

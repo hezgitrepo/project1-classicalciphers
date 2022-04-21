@@ -2,18 +2,19 @@
 <!--
 Keyword cipher is a form of monoalphabetic substitution. 
 A keyword is used as the key, and it determines the letter matchings of the cipher alphabet to the plain alphabet. 
-Repeats of letters in the word are removed, then the cipher alphabet is generated with the keyword matching to A, B, C, etc. until the keyword is used up, whereupon the rest of the ciphertext letters are used in alphabetical order, excluding those already used in the key. 
+Repeats of letters are removed, then the cipher alphabet is generated with the keyword matching to A, B, C, etc. 
+until the keyword is used up, whereupon the rest of the ciphertext letters are used in alphabetical order, 
+excluding those already used in the key. 
 
 AUTHORS: Michael Thorman, Hez Thang, Garrett Sanders
 -->
-
 <html lang="en">
 <head>
 
 <meta charset="UTF-8">
 
-
 <title>Keyword Substitution Cipher</title>
+
 <style>
 *{
 	margin:0 0 6px;
@@ -40,6 +41,7 @@ li, li a{
 	color: white;
 	border-radius: 3px;
 	padding: 2px;
+	font: cipher;
 }
 
 h2{
@@ -50,7 +52,7 @@ h2{
 h3{
 	color: #1E6E68;
 	line-height: 30px;
-	text-align: center;
+	text-align: left;
 }
 
 #ciphers{			
@@ -70,39 +72,104 @@ h3{
 hr{						
 	margin: 10px 0;
 	width: 100%;
-	float: left;
+	float: left;	
 }
+
 </style>
 </head>
 
 <body>
-	<script src="keyword.js"></script>
 	<header>
-		<h1>Classical Cryptography Autosolver - Keyword Substitution Cipher</h1>
-		<p>By Michael Thorman, Hez Thang, Garrett Sanders</p>
+		<h1>Classical Cryptography Autosolver - Keyword Cipher</h1>
+		<p>Created by Michael Thorman, Hez Thang, Garrett Sanders</p>
     </header>
-	<!-- <div id="ciphers"> -->
 		<h3> Enter the message(s) you want to decipher with the appropriate keyword</h3>
 		<hr/> 
 
-		<form>
+			<div class = "form"> 
+			
 			<label for="message">Ciphertext Message:</label>
 			<br/>
-			<textarea rows="10" cols="90" id ="message"  name="message" placeholder="Enter your message here..."></textarea>
+			<textarea rows="10" cols="90" id ="msgbox"  name="message" placeholder="Enter your message here..."></textarea>
 			<!-- <input type = "text" name = "" id = "message" /> -->
 
 			<br/>
 			<hr>	
 			<label>Keyword: </label>
-			<input type= "text" placeholder="Enter a keyword here..." name="" id="key" >
+			<br>
+			<!-- <input type= "text" placeholder="Enter a keyword here..." name="" id="key" > -->
+			<textarea cols="90" rows="5"  id = "key" placeholder="Enter your keyword here..."></textarea> 
 
 		<hr>
 		<br/>
-		<button vaule = "encrypt" onclick="encryptString()" >Decipher Message </button>
-		
-			<textarea cols="90" rows="20"  id = "output" placeholder="Algorithm used, tests used for determination of algorithm and results used to break the message" readonly></textarea>
-		</form>
+		<button id = "cipherbtn">Cipher The Message </button>
+		<button id = "decipherbtn">Decipher The Message </button>
+		<br>		
+		<label for ="output" > Deciphered Message:</label>
+		<br>
+			<textarea cols="90" rows="10"  id = "output" placeholder="Algorithm used, tests used for determination of algorithm and results used to break the message" ></textarea>
 	</div>
+
+	<!--  JS  STARTS here & down -->
+	<script language="JavaScript">
+
+		///declare variables 
+		var shuffledArr;
+		let alphabetArr = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+
+function shuffle(array) {
+	let shuffledArray = array.slice(0,array.length)
+	var currentIndex = shuffledArray.length;
+	var temporaryValue, randomIndex;
+
+	while (0 !== currentIndex) {
+		randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex -= 1;
+
+		temporaryValue = shuffledArray[currentIndex];
+		shuffledArray[currentIndex] = shuffledArray[randomIndex];
+		shuffledArray[randomIndex] = temporaryValue;
+	}
+
+	return shuffledArray;
+}
+
+function cipher(){
+shuffledArr = shuffle(alphabetArr);
+document.getElementById("key").innerHTML = shuffledArr.join().replace(/,/g, '')
+
+var textArr = document.getElementById("msgbox").value.split("");
+for(let k=0; k<textArr.length; k++){
+if ((textArr[k] == ' ') || (textArr[k] == '\t') || (textArr[k] == '\n' || alphabetArr.indexOf(textArr[k].toUpperCase())==-1)){
+continue;
+
+}else
+textArr[k]=shuffledArr[alphabetArr.indexOf(textArr[k].toUpperCase())];
+	}
+document.getElementById("output").innerHTML = textArr.join().replace(/,/g, '')
+}
+	
+	
+function decipher(){
+var textArr = document.getElementById("output").value.split("");
+for(let k=0; k<textArr.length;k++){
+if ((textArr[k] == ' ') || (textArr[k] == '\t') || (textArr[k] == '\n' || alphabetArr.indexOf(textArr[k].toUpperCase())==-1)){
+continue;
+
+} else
+textArr[k]=alphabetArr[shuffledArr.indexOf(textArr[k].toUpperCase())];
+}document.getElementById("output").innerHTML = textArr.join().replace(/,/g, '')
+}
+	
+
+	document.getElementById("cipherbtn").onclick=function(){
+	cipher();
+	}
+	
+	document.getElementById("decipherbtn").onclick=function(){
+	decipher();
+	}
+</script>
 
 </body>
 </html>
