@@ -9,7 +9,8 @@ AUTHORS: Michael Thorman, Hez Thang, Garrett Sanders
 <meta charset="UTF-8">
 
 
-<title>Columnar Transposition</title>
+    
+<title>Columnar Transposition Cipher</title>
 <style>
 *{
 	margin:0 0 6px;
@@ -73,24 +74,83 @@ hr{
 
 <body>
 	<header>
-		<h1>Classical Cryptography Autosolver - Columnar Transposition</h1>
+		<h1>Classical Cryptography Autosolver - Columnar Transposition Cipher</h1>
 		<p>By Michael Thorman, Hez Thang, Garrett Sanders</p>
     </header>
 	<div id="ciphers">
-		<h3> Please enter the ciphertext and click on decipher </h3>
+		<h2> Enter a ciphertext with the approriate key word and an anagram key to decipher the message </h2>
 		<hr/> 
+
+		<script language="JavaScript">
+				function decipherFunction() {
+					var cipher = document.getElementById("ciphertext").value; //inputed ciphertext
+					var cipherText = cipher.replace(/\s+/g,'');
+					var anagramKeyInput = document.getElementById("anagram").value;
+					var key = document.getElementById("key").value; 
+					
+					var keyLength = key.length;  //get key length 
+ 					var cipherTextLength = cipherText.length; //get ciphertext length 
+ 					var segment = cipherText.length/keyLength; 
  
-		
-			
+ 					var anagramStringArray = anagramKeyInput.split(""); 
+ 					var anagramArray = anagramStringArray.map(Number); 
+ 					const cipherTextArray = cipherText.split(""); //split ciphertext up into array
+ 
+
+ 					//create matrix. First create tmp array. Size based on greatest common factor. Then create another array. Fill it with 0's then add the ciphertext to it. 
+					var tmp = []; 
+					for(var i=0; i<cipherTextLength; i+=segment){
+   						tmp.push(cipherTextArray.slice(i, i+segment));
+   					}   
+
+					const matrix = Array.from({length: tmp[0].length}, ()=> new Array(tmp.length).fill(0));
+					for(let r=0; r<tmp.length; r++){
+    						for(let c=0; c<tmp[0].length; c++){
+        						matrix[c][r]=tmp[r][c];
+    						}
+   					}
+					//Transpose matrix 
+					var transposeMatrix = [].concat.apply([], matrix); 
+					//join together array to create a string with deciphered text
+					var decipheredString = transposeMatrix.join("");
+					
+
+					//Deciphering irregular columnar transposition cipher 
+					var tmp2 = []; 
+					for(var i=0; i<cipherTextLength; i+=segment){
+   						tmp2.push(cipherTextArray.slice(i, i+segment));
+   					}   
+
+					var tmp3 = []; 
+					for (var i=0; i<anagramArray.length; i++){
+     						tmp3[i] =tmp2[anagramArray[i]]; 
+ 					}
+
+					const matrix2 = Array.from({length: tmp3[0].length}, ()=> new Array(tmp3.length).fill(0));
+ 					for(let r=0; r<tmp3.length; r++){
+     						for(let c=0; c<tmp3[0].length; c++){
+         						matrix2[c][r]=tmp3[r][c];
+     						}
+    					}
+					var transposeMatrix2 = [].concat.apply([], matrix2);
+					var decipheredString2 = transposeMatrix2.join(""); 
+					document.getElementById("output").value = "Column Transposition using permutation: "+decipheredString +"\n\nColumn Transposition cipher using permutation/anagram: "+ decipheredString2;
+
+ 				}	
+        			</script>
+
 				<label for="ciphertext"> Ciphertext:</label>
 				<br/>
-				<textarea rows="10" cols="90" id="ciphertext" name="ciphertext" placeholder="Enter ciphertext here"></textarea>
+				<textarea rows="10" cols="90" id="ciphertext" name="ciphertext" placeholder="Enter your ciphertext here..."></textarea>
 				<br/>
-				<button onClick="decipher()">Decipher</button>
+				<textarea rows="1" cols="30" id="key" name="key" placeholder="Enter your key here..."></textarea>
+				<br>
+				<textarea rows="1" cols="30" id="anagram" name="anagram" placeholder="Enter your anagram key here (e.g. 1,2,3)..."></textarea>
 				<br/>
-				<textarea cols="90" rows="20" id="output" name="output" placeholder="Algorithm used, tests used for determination of algorithm and results used to break the message" readonly></textarea>
-			
-
+				<hr>
+				<button onClick="decipherFunction()">Decipher</button>
+				<br/>
+				<textarea cols="90" rows="10" id="output" name="output" placeholder="Algorithm used, tests used for determination of algorithm and results used to break the message..." ></textarea>
 	 
 	</div>
 </body>

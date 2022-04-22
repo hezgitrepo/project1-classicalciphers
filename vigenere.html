@@ -7,9 +7,9 @@ AUTHORS: Michael Thorman, Hez Thang, Garrett Sanders
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script src="vigenere.js"></script>
 
-
-<title>Vigenere's</title>
+<title>Vigenère's Cipher</title>
 <style>
 *{
 	margin:0 0 6px;
@@ -73,25 +73,25 @@ hr{
 
 <body>
 	<header>
-		<h1>Classical Cryptography Autosolver - Vigenere's Cipher</h1>
-		<p>By Michael Thorman, Hez Thang, Garrett Sanders</p>
+		<h1>Classical Cryptography Autosolver - Vigenère's Cipher</h1>
+		<p>Created by Michael Thorman, Hez Thang, Garrett Sanders</p>
     </header>
 	<div id="ciphers">
-		<h3> Please enter the ciphertext and click on decipher </h3>
+		<h2> Enter your ciphertext message with the key to decipher your message </h2>
 		<hr/> 
  
 		
 			
 				<label for="ciphertext"> Ciphertext:</label>
 				<br/>
-				<textarea rows="10" cols="90" id="ciphertext" name="ciphertext" placeholder="Enter ciphertext here"></textarea>
+				<textarea rows="10" cols="90" id="ciphertext" name="ciphertext" placeholder="Input your ciphertext message here..."></textarea>
 				<br/>
-				<button onClick="decipher()">Decipher</button>
+				<textarea rows="1" cols="28" id="vigenereKey" name="vigenereKey" placeholder="Vigenere Key(e.g. h,o,l,d)..."></textarea> 
 				<br/>
-				<textarea cols="90" rows="20" id="output" name="output" placeholder="Algorithm used, tests used for determination of algorithm and results used to break the message" readonly></textarea>
+				<button id="decipher" onclick="decipher()">Decipher The Message</button>
+				<br/>
+				<textarea cols="90" rows="10" id="output" name="output" placeholder="Algorithm used, tests used for determination of algorithm and results used to break the message..."></textarea>
 			
-
-	 
 	</div>
 </body>
 </html>
