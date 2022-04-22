@@ -2,6 +2,28 @@
 //Authored by Garrett Sanders, Hez Thang, and Michael Thorman
 //Goal of this program will be to solve a vigenere cipher given the ciphertext and a vigenere key.
 
+//Funtion to find Index of Coincidence 
+function iOC() {
+	let ciphertext = document.getElementById("ciphertext").value;
+	ciphertext = String(ciphertext).replace(/\s+/g, '');
+	ciphertext = ciphertext.toLowerCase();
+	let freqs = new Array(26);
+    let totalCount = 0;
+    for(let i = 0; i < 26; i++){
+		freqs[i] = 0;
+    }
+	for(i = 0; i < ciphertext.length; i++){
+        freqs[ciphertext.charCodeAt(i) - 97]++;
+        totalCount++;
+    }
+    let sum = 0;
+    for(i = 0; i < 26; i++) { 
+		sum = sum + freqs[i]*(freqs[i]-1);
+    }
+	let iOC = sum / (totalCount * (totalCount - 1));
+	document.getElementById("iOCDisplay").value = iOC;
+}
+
 //Basic mod function for easue of use
 function mod(x, y){
 	return (((x % y) + y) % y);

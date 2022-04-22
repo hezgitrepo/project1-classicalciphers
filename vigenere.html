@@ -9,7 +9,7 @@ AUTHORS: Michael Thorman, Hez Thang, Garrett Sanders
 <meta charset="UTF-8">
 <script src="vigenere.js"></script>
 
-<title>Vigenère's Cipher</title>
+<title>Vigenere's</title>
 <style>
 *{
 	margin:0 0 6px;
@@ -73,24 +73,31 @@ hr{
 
 <body>
 	<header>
-		<h1>Classical Cryptography Autosolver - Vigenère's Cipher</h1>
+		<h1>Classical Cryptography Autosolver - Vigenère Cipher</h1>
 		<p>Created by Michael Thorman, Hez Thang, Garrett Sanders</p>
     </header>
 	<div id="ciphers">
-		<h2> Enter your ciphertext message with the key to decipher your message </h2>
+		<h3> Enter the ciphertext with the appropriate key to decipher the message or compute the Index of Coincidence </h3>
 		<hr/> 
  
 		
 			
 				<label for="ciphertext"> Ciphertext:</label>
 				<br/>
-				<textarea rows="10" cols="90" id="ciphertext" name="ciphertext" placeholder="Input your ciphertext message here..."></textarea>
+				<textarea rows="10" cols="90" id="ciphertext" name="ciphertext" placeholder="Enter a ciphertext here..."></textarea>
 				<br/>
-				<textarea rows="1" cols="28" id="vigenereKey" name="vigenereKey" placeholder="Vigenere Key(e.g. h,o,l,d)..."></textarea> 
+				<textarea rows="1" cols="27" id="vigenereKey" name="vigenereKey" placeholder="Enter the Vigenere Key(e.g. h,o,l,d)..."></textarea> 
 				<br/>
-				<button id="decipher" onclick="decipher()">Decipher The Message</button>
+				<button id="iOC" onclick="iOC()">Find IoC</button>
+				<br>
+				<text id="iOCLabel" name="iOCLabel">Index of Coincidence: </text> 
+				<br>
+				<textarea rows="1" cols="27" id="iOCDisplay" name="iOCDisplay" readonly>????</textarea>
 				<br/>
-				<textarea cols="90" rows="10" id="output" name="output" placeholder="Algorithm used, tests used for determination of algorithm and results used to break the message..."></textarea>
+				<hr>
+				<button id="decipher" onclick="decipher()">Decipher</button>
+				<br/>
+				<textarea cols="90" rows="10" id="output" name="output" placeholder="Algorithm used, tests used for determination of algorithm and results used to break the message..." readonly></textarea>
 			
 	</div>
 </body>
