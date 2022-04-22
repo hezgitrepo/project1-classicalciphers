@@ -78,13 +78,13 @@ hr{
     </header>
 		<!-- <div class="input"> -->
 
-		<h2> Enter the plaintext message you wish to decipher with the appropriate shift size </h2>
+		<h2> Enter the ciphertext you wish to decipher with the appropriate shift size </h2>
 		<hr/> 
 		<form>  
 
-				<label for="plaintext">Plaintext:</label>
+				<label for="ciphertext">Ciphertext:</label>
 				<br/>
-				<textarea rows="10" cols="90"  name="plaintext" placeholder="Enter the plaintext message you wish to decode here..."></textarea>
+				<textarea rows="15" cols="90"  name="ciphertext" placeholder="Enter the ciphertext you wish to decode here..."></textarea>
 				<br/>
 				<hr>	
 				<label>Shift Size: </label>
@@ -94,7 +94,9 @@ hr{
 			<br/>
 				<input type='submit' value='Decipher The Message'>
 				<br/>
-				<textarea cols="90" rows="10"  id="output" placeholder="Algorithm used, tests used for determination of algorithm and results used to break the message..." ></textarea>
+				<label for="ciphertext">Plaintext:</label>
+				<br>
+				<textarea cols="90" rows="15"  id="output" placeholder="Algorithm used, tests used for determination of algorithm and results used to break the message..." ></textarea>
 			</form>
 
 	<script language="JavaScript">
@@ -105,15 +107,14 @@ hr{
     'G','H','I','J','K','L',
     'M','N','O','P','Q','R',
     'S','T','U','V','W','X',
-    'Y','Z'
-  ];
+    'Y','Z' ];
   
   const form = document.forms[0];
   const output = document.getElementById('output');
   
   form.addEventListener ('submit',event => {
     event.preventDefault();
-    output.innerHTML = [... form.plaintext.value ].map(char => encrypt(char)).join('');
+    output.innerHTML = [... form.ciphertext.value ].map(char => encrypt(char)).join('');
   }
   );
   //the main algorithm begins here
@@ -122,7 +123,8 @@ hr{
     if (alphabet.includes(char.toUpperCase()))
     { 
       const position = alphabet.indexOf(char.toUpperCase());
-      const newPosition = (position + shift)%26;
+      const newPosition = (position - shift)%26;
+	  
       return alphabet[newPosition] 
     }
     else { return char }
